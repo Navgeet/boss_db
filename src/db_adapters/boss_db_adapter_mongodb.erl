@@ -413,6 +413,7 @@ build_conditions2(Key, Operator, Value) ->
 	    [{Key, {'$nin', lists:map(list_pack_function(Key), [H|T])}}];
 	{'not_in', {Min, Max}} ->
 	    [{'$or', [{Key, {'$lt', Min}}, {Key, {'$gt', Max}}]}];
+        {'bson', Value} -> [Value];
 	{Operator, Value} ->
 	    [{Key, {boss_to_mongo_op(Operator), Value}}]
     end.
